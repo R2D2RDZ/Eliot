@@ -16,7 +16,10 @@ using UnityEngine;
 public class SlowGhost : GhostMovement
 {
     private float angle = 0f; // Ángulo para el movimiento circular
-
+    void Awake()
+    {
+        speed = 5f; // Velocidad para fantasmas lentos
+    }
     protected override void Move()
     {
         angle += speed * Time.deltaTime; // Incrementar ángulo según la velocidad

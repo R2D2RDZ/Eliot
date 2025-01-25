@@ -25,6 +25,10 @@ public class ModerateGhost : GhostMovement
     private float zigzagTimer = 0f; // Temporizador para cambiar de dirección
     private int direction = 1; // Dirección del zigzag
 
+    void Awake()
+    {
+        speed = 10f; // Velocidad para fantasmas lentos
+    }
     protected override void Move()
     {
         zigzagTimer += Time.deltaTime;
