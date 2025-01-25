@@ -7,7 +7,7 @@ public class VRGun : MonoBehaviour
     [Header("Configuración del arma")]
     public GameObject bulletPrefab; // Prefab del proyectil
     public Transform firePoint; // Punto desde donde se dispararán las balas
-    public float bulletSpeed = 10f; // Velocidad del proyectil
+    public float bulletSpeed = 5f; // Velocidad del proyectil
 
     [Header("Controladores de las manos")]
     public Transform leftHandController; // Referencia al controlador de la mano izquierda
@@ -102,7 +102,7 @@ public class VRGun : MonoBehaviour
             rb.linearVelocity = firePoint.forward * bulletSpeed;
         }
 
-        // Destruye la bala después de 5 segundos
-        Destroy(bullet, 5f);
+        // Destruye la bala después de 2 segundos
+        Destroy(bullet, 2f);
     }
 }

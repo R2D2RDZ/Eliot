@@ -2,10 +2,42 @@ using UnityEngine;
 
 public class Ghost : MonoBehaviour
 {
+    public GameObject ghostPrefab; // Prefab base de los fantasmas
+    public int numberOfGhosts = 3; // Número de fantasmas a generar
+    public Vector3 roomBounds = new Vector3(24f, 8f, 24f); // Límites de la habitación
+
+    private bool ghostsSpawned = false; // Verificar si los fantasmas ya fueron generados
+
+    public void SpawnGhosts()
+    {
+        if (ghostsSpawned) return;
+
+        for (int i = 0; i < numberOfGhosts; i++)
+        {
+            Vector3 randomPosition = GetRandomPosition();
+            Instantiate(ghostPrefab, randomPosition, Quaternion.identity);
+        }
+
+        ghostsSpawned = true; // Marcar como generados
+    }
+
+    private Vector3 GetRandomPosition()
+    {
+        return new Vector3(
+            Random.Range(-roomBounds.x / 2f, roomBounds.x / 2f),
+            Random.Range(0f, roomBounds.y),
+            Random.Range(-roomBounds.z / 2f, roomBounds.z / 2f)
+        );
+    }
+}
+
+
+/*public class Ghost : MonoBehaviour
+{
     [Header("Configuración de los fantasmas")]
     public GameObject ghostPrefab; // Prefab del fantasma
     public Transform[] spawnPoints; // Puntos donde aparecerán los fantasmas
-    public float movementSpeed = 2f; // Velocidad de movimiento de los fantasmas
+    public float movementSpeed = 2.5f; // Velocidad de movimiento de los fantasmas
 
     private bool ghostsSpawned = false; // Verifica si los fantasmas ya aparecieron
 
@@ -30,42 +62,11 @@ public class Ghost : MonoBehaviour
     }
 }
 
-/*public class GhostMovement : MonoBehaviour
-{
-    public float speed; // Velocidad del fantasma
-    private bool isStopped = false; // Estado para saber si el fantasma está detenido
-
-    void Update()
-    {
-        if (!isStopped)
-        {
-            // Movimiento simple hacia adelante
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        // Verifica si el objeto que colisionó tiene el tag "BurbujaBala"
-        if (collision.gameObject.CompareTag("BurbujaBala"))
-        {
-            StopGhost(); // Detener al fantasma
-        }
-    }
-
-    private void StopGhost()
-    {
-        isStopped = true; // Cambiar el estado para detener el movimiento
-        speed = 0f; // Asegurarse de que la velocidad sea 0
-        Debug.Log($"{gameObject.name} ha sido detenido.");
-    }
-}*/
-
 public class GhostMovement : MonoBehaviour
 {
     public float speed; // Velocidad del fantasma
     public Vector3 roomBounds = new Vector3(24f, 8f, 24f); // Límites de la habitación (x, y, z)
-    public float floatSpeed = 0.5f; // Velocidad del efecto de "flotación"
+    public float floatSpeed = 1.5f; // Velocidad del efecto de "flotación"
     public float changeDirectionInterval = 2f; // Intervalo de tiempo para cambiar de dirección
 
     private Vector3 targetPosition; // La posición a la que el fantasma se moverá
@@ -139,7 +140,7 @@ public class GhostMovement : MonoBehaviour
         isStopped = true; // Cambiar el estado para detener el movimiento
         speed = 0f; // Asegurarse de que la velocidad sea 0
         Debug.Log($"{gameObject.name} ha sido detenido.");
-        Destroy(gameObject, 2f); // Destruir el fantasma después de 2 segundos
+        //Destroy(gameObject, 2f); // Destruir el fantasma después de 2 segundos
     }
-}
+}*/
 
