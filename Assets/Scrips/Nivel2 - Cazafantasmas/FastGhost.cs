@@ -39,6 +39,10 @@ public class FastGhost : GhostMovement
     private float zigzagTimer = 0f; // Para zigzag
     private int direction = 1; // Dirección del zigzag
 
+    void Awake()
+    {
+        speed = 15f; // Velocidad para fantasmas lentos
+    }
     protected override void Move()
     {
         // Combinación de círculo y zigzag
