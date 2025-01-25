@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Ghost : MonoBehaviour
+/*public class Ghost : MonoBehaviour
 {
     public GameObject ghostPrefab; // Prefab base de los fantasmas
     public int numberOfGhosts = 3; // Número de fantasmas a generar
@@ -29,7 +29,7 @@ public class Ghost : MonoBehaviour
             Random.Range(-roomBounds.z / 2f, roomBounds.z / 2f)
         );
     }
-}
+}*/
 
 
 /*public class Ghost : MonoBehaviour
@@ -143,4 +143,51 @@ public class GhostMovement : MonoBehaviour
         //Destroy(gameObject, 2f); // Destruir el fantasma después de 2 segundos
     }
 }*/
+
+
+public class Ghost : MonoBehaviour
+{
+    public GameObject slowGhostPrefab;
+    public GameObject moderateGhostPrefab;
+    public GameObject fastGhostPrefab;
+
+    public int numberOfEachType = 3; // Número de cada tipo de fantasma
+    public Vector3 roomBounds = new Vector3(24f, 8f, 24f);
+
+    private bool ghostsSpawned = false;
+
+    public void SpawnGhosts()
+    {
+        if (ghostsSpawned) return;
+
+        // Generar fantasmas lentos
+        for (int i = 0; i < numberOfEachType; i++)
+        {
+            Instantiate(slowGhostPrefab, GetRandomPosition(), Quaternion.identity);
+        }
+
+        // Generar fantasmas moderados
+        for (int i = 0; i < numberOfEachType; i++)
+        {
+            Instantiate(moderateGhostPrefab, GetRandomPosition(), Quaternion.identity);
+        }
+
+        // Generar fantasmas rápidos
+        for (int i = 0; i < numberOfEachType; i++)
+        {
+            Instantiate(fastGhostPrefab, GetRandomPosition(), Quaternion.identity);
+        }
+
+        ghostsSpawned = true;
+    }
+
+    private Vector3 GetRandomPosition()
+    {
+        return new Vector3(
+            Random.Range(-roomBounds.x / 2f, roomBounds.x / 2f),
+            Random.Range(0f, roomBounds.y),
+            Random.Range(-roomBounds.z / 2f, roomBounds.z / 2f)
+        );
+    }
+}
 
