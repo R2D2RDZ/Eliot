@@ -7,8 +7,9 @@ TagManager:
   - Anchor
   - Arma
   - BurbujaBala
-  - Fantasma
   - Wall
+  - Muebles
+  - Ghost
   layers:
   - Default
   - TransparentFX
