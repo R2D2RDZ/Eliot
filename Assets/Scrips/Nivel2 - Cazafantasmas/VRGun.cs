@@ -78,6 +78,9 @@ public class VRGun : MonoBehaviour
         {
             transform.position = currentHandController.position;
             transform.rotation = currentHandController.rotation;
+
+            // Invocar fantasmas desde el GhostController
+            Object.FindAnyObjectByType<Ghost>().SpawnGhosts();
         }
 
         // Si el trigger está presionado mientras el arma está agarrada, dispara
