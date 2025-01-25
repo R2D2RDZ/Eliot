@@ -1,11 +1,12 @@
+using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.XR;
 
 /*public class VRGun : MonoBehaviour
 {
-    [Header("Configuraci�n del arma")]
+    [Header("Configuracion del arma")]
     public GameObject bulletPrefab; // Prefab del proyectil
-    public Transform firePoint; // Punto desde donde se disparar�
+    public Transform firePoint; // Punto desde donde se disparara
     public float bulletSpeed = 20f; // Velocidad del proyectil
     public float fireRate = 0.5f; // Tiempo entre disparos
 
@@ -26,11 +27,11 @@ using UnityEngine.XR;
 
     void HandleGrip()
     {
-        // Si se presiona el bot�n de grip, el arma sigue la posici�n y rotaci�n de la mano
+        // Si se presiona el boton de grip, el arma sigue la posicion y rotacion de la mano
         if (OVRInput.Get(gripButton))
         {
             isGripped = true;
-            // Mover el arma a la posici�n y rotaci�n de la mano
+            // Mover el arma a la posicion y rotacion de la mano
             transform.position = handTransform.position;
             transform.rotation = handTransform.rotation;
         }
@@ -42,7 +43,7 @@ using UnityEngine.XR;
 
     void HandleShooting()
     {
-        // Si el arma est� en grip y el bot�n de disparo est� presionado 
+        // Si el arma esta en grip y el boton de disparo esta presionado 
         if (isGripped && OVRInput.GetDown(fireButton) && Time.time >= nextFireTime)
         {
             Shoot();
@@ -65,7 +66,7 @@ using UnityEngine.XR;
         // Destruye el proyectil despu�s de 5 segundos
         Destroy(bullet, 5f);
     }
-}*/
+}
 
 public class VRGun : MonoBehaviour
 {
@@ -122,6 +123,80 @@ public class VRGun : MonoBehaviour
         }
 
         // Destruye la bala automaticamente despues de 5 segundos para evitar saturar la escena
+        Destroy(bullet, 5f);
+    }
+}*/
+
+public class VRGun : MonoBehaviour
+{
+    [Header("Configuración del arma")]
+    public GameObject bulletPrefab; // Prefab del proyectil
+    public Transform firePoint; // Punto desde donde se dispararán las balas
+    public float bulletSpeed = 20f; // Velocidad del proyectil
+
+    private Transform rightHandController; // Referencia al Transform del RightHand Controller
+    private bool isGripped = false; // Estado para saber si el arma está agarrada
+
+    void Start()
+    {
+        // Busca el controlador derecho dentro del XR Rig
+        var xrRig = GameObject.FindFirstObjectByType<XROrigin>(); // Encuentra el XR Origin
+        if (xrRig != null)
+        {
+            rightHandController = xrRig.transform.Find("RightHand Controller");
+        }
+
+        if (rightHandController == null)
+        {
+            Debug.LogError("RightHand Controller no encontrado. Asegúrate de que está configurado en el XR Rig.");
+        }
+    }
+
+    void Update()
+    {
+        if (rightHandController == null) return; // Si no se encuentra el controlador, no hacer nada
+
+        // Detecta los inputs del controlador derecho
+        InputDevice rightHand = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
+
+        // Verifica si el botón de grip está presionado
+        rightHand.TryGetFeatureValue(CommonUsages.gripButton, out bool gripValue);
+
+        // Verifica si el botón de trigger (disparo) está presionado
+        rightHand.TryGetFeatureValue(CommonUsages.triggerButton, out bool triggerValue);
+
+        // Si el botón de grip está presionado, el arma sigue la mano
+        if (gripValue)
+        {
+            isGripped = true;
+            transform.position = rightHandController.position; // Sigue la posición del controlador
+            transform.rotation = rightHandController.rotation; // Sigue la rotación del controlador
+        }
+        else
+        {
+            isGripped = false; // Si el grip se suelta, el arma deja de seguir la mano
+        }
+
+        // Si el arma está agarrada y el trigger está presionado, dispara
+        if (isGripped && triggerValue)
+        {
+            Shoot();
+        }
+    }
+
+    void Shoot()
+    {
+        // Instancia una bala en el FirePoint
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+
+        // Aplica velocidad al Rigidbody de la bala
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.linearVelocity = firePoint.forward * bulletSpeed;
+        }
+
+        // Destruye la bala después de 5 segundos
         Destroy(bullet, 5f);
     }
 }
