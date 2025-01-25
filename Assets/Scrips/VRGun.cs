@@ -140,15 +140,15 @@ public class VRGun : MonoBehaviour
     void Start()
     {
         // Busca el controlador derecho dentro del XR Rig
-        var xrRig = GameObject.FindFirstObjectByType<XROrigin>(); // Encuentra el XR Origin
+        var xrRig = GameObject.FindAnyObjectByType<XROrigin>(); // Encuentra el XR Origin
         if (xrRig != null)
         {
-            rightHandController = xrRig.transform.Find("RightHand Controller");
+            rightHandController = xrRig.transform.Find("Camera Offset/Right Controller");
         }
 
         if (rightHandController == null)
         {
-            Debug.LogError("RightHand Controller no encontrado. Asegúrate de que está configurado en el XR Rig.");
+            Debug.LogError("Right Controller no encontrado. Asegúrate de que está configurado en el XR Rig.");
         }
     }
 

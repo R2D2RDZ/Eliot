@@ -8,8 +8,30 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private float jumpHeight = 3f;
     [SerializeField] private LayerMask groundLayers;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-  /*  private bool IsGrounded()
+
+    private float gravity = Physics.gravity.y;
+    private Vector3 movement;
+
+    private void Update()
+    {
+        bool _isGrounded = IsGrounded();
+
+        if (jumpButton.action.WasPressedThisFrame() && _isGrounded)
+        {
+            Jump();
+        }
+
+        movement.y += gravity * Time.deltaTime;
+
+        cc.Move(movement * Time.deltaTime);
+    }
+    private bool IsGrounded()
     {
         return Physics.CheckSphere(transform.position, 0.2f, groundLayers);
-    }*/
+    }
+
+    private void Jump()
+    {
+        movement.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity); 
+    }
 }
