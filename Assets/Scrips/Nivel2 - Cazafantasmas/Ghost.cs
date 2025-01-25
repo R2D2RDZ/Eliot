@@ -227,7 +227,7 @@ public abstract class GhostMovement : MonoBehaviour
     {
         isStopped = true;
         speed = 0f;
-        Destroy(gameObject, 2f); // Destruir el fantasma después de 2 segundos
+        //Destroy(gameObject, 2f); // Destruir el fantasma después de 2 segundos
     }
 
     private void HandleObstacles()
