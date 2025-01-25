@@ -15,9 +15,13 @@ public class PlayerJump : MonoBehaviour
     private void Update()
     {
         bool _isGrounded = IsGrounded();
-
+        if (jumpButton.action.WasPressedThisFrame())
+        {
+            Debug.Log("Button pressed");
+        }
         if (jumpButton.action.WasPressedThisFrame() && _isGrounded)
         {
+            Debug.Log("entro al if");
             Jump();
         }
 
@@ -27,7 +31,7 @@ public class PlayerJump : MonoBehaviour
     }
     private bool IsGrounded()
     {
-        return Physics.CheckSphere(transform.position, 0.2f, groundLayers);
+        return Physics.CheckSphere(transform.position, 0.3f, groundLayers);
     }
 
     private void Jump()
