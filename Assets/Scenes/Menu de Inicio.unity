@@ -169,6 +169,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customGravity: {x: 0, y: 0.8, z: 0}
+--- !u!82 &239666075 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: -6194666177376386004, guid: 83267e3daf125e144b39ef1a252597c1, type: 3}
+  m_PrefabInstance: {fileID: 1412081760}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &502505680
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,7 +748,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 942d5f66367b9e64988f8119bcaff2cd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.62
+      value: 1.077
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 942d5f66367b9e64988f8119bcaff2cd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -814,6 +819,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bubble Generada
       objectReference: {fileID: 0}
+    - target: {fileID: 9037784568350176914, guid: 83267e3daf125e144b39ef1a252597c1, type: 3}
+      propertyPath: popSound
+      value: 
+      objectReference: {fileID: 8300000, guid: c03ecad6ea57a41488bd1656cd53e2b6, type: 3}
+    - target: {fileID: 9037784568350176914, guid: 83267e3daf125e144b39ef1a252597c1, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 239666075}
     - target: {fileID: 9099049138309406440, guid: 83267e3daf125e144b39ef1a252597c1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.2
@@ -3076,7 +3089,7 @@ Transform:
   m_GameObject: {fileID: 2086589233653538866}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.089, z: 0}
+  m_LocalPosition: {x: 0, y: 0.296, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

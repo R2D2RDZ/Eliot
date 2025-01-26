@@ -30,6 +30,8 @@ public class destroyBubble : MonoBehaviour
         if (!string.IsNullOrEmpty(sceneToLoad))
         {
             SceneManager.LoadScene(sceneToLoad);
+
         }
     }
+
 }
