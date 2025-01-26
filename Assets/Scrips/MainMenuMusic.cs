@@ -2,22 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicManager : MonoBehaviour
+public class MainMenuMusic : MonoBehaviour
 {
     [Header("Clips de música")]
     public AudioClip defaultMusic; // Música por defecto
-    public AudioClip combatMusic; // Música al agarrar el arma
-    public AudioClip calmMusic; // Música cuando no hay fantasmas
 
     [Header("Configuración del audio")]
     public AudioSource audioSource; // Componente de AudioSource para reproducir la música
-
-    [Header("Referencias externas")]
-    public VRGun gunScript; // Referencia al script del arma
-    public Ghost[] ghosts; // Lista de fantasmas en la escena
-
-    private bool isCombatMusicPlaying = false; // Bandera para evitar cambios constantes de música
-    private bool isCalmMusicPlaying = false; // Bandera para evitar cambios constantes de música
 
     void Start()
     {
@@ -31,7 +22,7 @@ public class MusicManager : MonoBehaviour
         // Inicia la música por defecto
         PlayMusic(defaultMusic);
     }
-    void Update()
+    /*void Update()
     {
         if (gunScript != null && gunScript.isGripped)
         {
@@ -63,7 +54,7 @@ public class MusicManager : MonoBehaviour
                 isCalmMusicPlaying = false;
             }
         }
-    }
+    }*/
 
     private void PlayMusic(AudioClip clip)
     {
@@ -76,7 +67,7 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    private bool NoGhostsAlive()
+    /*private bool NoGhostsAlive()
     {
         // Verifica si todos los fantasmas han sido destruidos
         foreach (Ghost ghost in ghosts)
@@ -84,5 +75,5 @@ public class MusicManager : MonoBehaviour
             if (ghost != null) return false;
         }
         return true;
-    }
+    }*/
 }
