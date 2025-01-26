@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class GhostMovement : MonoBehaviour
 {
-    public float speed = 5f; // Velocidad del fantasma
+    public float speed = 10f; // Velocidad del fantasma
     public Vector3 roomBounds = new Vector3(24f, 8f, 24f); // Límites de la habitación (x, y, z)
     public float floatSpeed = 1.5f; // Velocidad del efecto de "flotación"
-    public float changeDirectionInterval = 2f; // Intervalo de tiempo para cambiar de dirección
+    public float changeDirectionInterval = 0.001f; // Intervalo de tiempo para cambiar de dirección
 
     private Vector3 targetPosition; // La posición a la que el fantasma se moverá
     private bool isStopped = false; // Estado para saber si el fantasma está detenido

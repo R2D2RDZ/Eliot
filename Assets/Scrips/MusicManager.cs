@@ -5,16 +5,18 @@ using UnityEngine;
 public class MusicManager : MonoBehaviour
 {
     [Header("Clips de música")]
-    public AudioClip initialMusic; // Música por defecto
-    public AudioClip actionMusic; // Música al agarrar el arma
-    public AudioClip endMusic; // Música cuando no hay fantasmas
-
+    public AudioClip defaultMusic; // Música por defecto
+    public AudioClip combatMusic; // Música al agarrar el arma
+    
     [Header("Configuración del audio")]
     public AudioSource audioSource; // Componente de AudioSource para reproducir la música
 
     [Header("Referencias externas")]
     public VRGun gunScript; // Referencia al script del arma
     public Ghost[] ghosts; // Lista de fantasmas en la escena
+
+    private bool isCombatMusicPlaying = false; // Bandera para evitar cambios constantes de música
+    private bool isCalmMusicPlaying = false; // Bandera para evitar cambios constantes de música
 
     void Start()
     {
@@ -26,7 +28,7 @@ public class MusicManager : MonoBehaviour
         }
 
         // Inicia la música por defecto
-        PlayDefaultMusic();
+        PlayMusic(defaultMusic);
     }
 
     void Update()
@@ -34,17 +36,22 @@ public class MusicManager : MonoBehaviour
         if (gunScript != null && gunScript.isGripped)
         {
             // Cambiar a la música de combate si el arma está agarrada
-            PlayMusic(actionMusic);
-        }
-        else if (NoGhostsAlive())
-        {
-            // Cambiar a la música calmada si no hay fantasmas
-            PlayMusic(endMusic);
+            if (!isCombatMusicPlaying)
+            {
+                PlayMusic(combatMusic);
+                isCombatMusicPlaying = true;
+                isCalmMusicPlaying = false;
+            }
         }
         else
         {
-            // Volver a la música por defecto
-            PlayMusic(initialMusic);
+            // Volver a la música por defecto si no se cumplen las condiciones anteriores
+            if (audioSource.clip != defaultMusic)
+            {
+                PlayMusic(defaultMusic);
+                isCombatMusicPlaying = false;
+                isCalmMusicPlaying = false;
+            }
         }
     }
 
@@ -52,14 +59,11 @@ public class MusicManager : MonoBehaviour
     {
         if (audioSource.clip != clip)
         {
+            audioSource.Stop();
+            audioSource.loop = true; // Activa el loop para este clip
             audioSource.clip = clip;
             audioSource.Play();
         }
-    }
-
-    private void PlayDefaultMusic()
-    {
-        PlayMusic(initialMusic);
     }
 
     private bool NoGhostsAlive()
