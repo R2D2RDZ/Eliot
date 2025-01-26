@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/AllSkyFree.meta
+guid: 4fd8156920794ed46932c2323e3883fa
+folderAsset: yes
+========
 guid: 45661b1f156bffd4f8290022abc19150
+>>>>>>>> 92c80348a6c7528fe40fc21e968152c88d8a7b6b:Assets/Scenes/Menu de Creditos.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
