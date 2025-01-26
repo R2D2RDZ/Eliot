@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5827059171463839537}
-  - component: {fileID: 4893766104201604573}
   - component: {fileID: 5787337875446320430}
   - component: {fileID: 571421979029269030}
   - component: {fileID: 8821539334643910679}
   - component: {fileID: 4198802804460247891}
   - component: {fileID: 1156073864256575403}
+  - component: {fileID: 5373275412808860986}
   m_Layer: 0
   m_Name: Arma
   m_TagString: Arma
@@ -38,14 +38,6 @@ Transform:
   - {fileID: 2071150347242222967}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4893766104201604573
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7918964801985369339}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &5787337875446320430
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -127,7 +119,10 @@ MonoBehaviour:
   bulletPrefab: {fileID: 0}
   firePoint: {fileID: 2071150347242222967}
   bulletSpeed: 10
+  grabDistance: 0.5
   leftHandController: {fileID: 0}
+  rightHandController: {fileID: 0}
+  ghostController: {fileID: 0}
 --- !u!54 &4198802804460247891
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -277,6 +272,14 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!33 &5373275412808860986
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7918964801985369339}
+  m_Mesh: {fileID: -2962691173252998806, guid: b697aa1717fcd96419c69736f50a1a9c, type: 3}
 --- !u!1 &9138143345068271294
 GameObject:
   m_ObjectHideFlags: 0
