@@ -7,8 +7,7 @@ public class MusicManager : MonoBehaviour
     [Header("Clips de música")]
     public AudioClip defaultMusic; // Música por defecto
     public AudioClip combatMusic; // Música al agarrar el arma
-    public AudioClip calmMusic; // Música cuando no hay fantasmas
-
+    
     [Header("Configuración del audio")]
     public AudioSource audioSource; // Componente de AudioSource para reproducir la música
 
@@ -31,6 +30,7 @@ public class MusicManager : MonoBehaviour
         // Inicia la música por defecto
         PlayMusic(defaultMusic);
     }
+
     void Update()
     {
         if (gunScript != null && gunScript.isGripped)
@@ -41,16 +41,6 @@ public class MusicManager : MonoBehaviour
                 PlayMusic(combatMusic);
                 isCombatMusicPlaying = true;
                 isCalmMusicPlaying = false;
-            }
-        }
-        else if (NoGhostsAlive())
-        {
-            // Cambiar a la música calmada si no hay fantasmas
-            if (!isCalmMusicPlaying)
-            {
-                PlayMusic(calmMusic);
-                isCalmMusicPlaying = true;
-                isCombatMusicPlaying = false;
             }
         }
         else
