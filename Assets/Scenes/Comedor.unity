@@ -4091,6 +4091,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubblePrefab: {fileID: 7746687718225812986, guid: 83267e3daf125e144b39ef1a252597c1, type: 3}
+  offset: {x: 0, y: 2, z: 0}
+  ghosts: []
 --- !u!4 &1126374755
 Transform:
   m_ObjectHideFlags: 0
@@ -4758,6 +4760,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ghost
       objectReference: {fileID: 0}
+    - target: {fileID: 3228245423956512744, guid: ee1ba5c15cc74a74fabef1723a85f58d, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 5770846332903469655, guid: ee1ba5c15cc74a74fabef1723a85f58d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.46
@@ -5031,7 +5037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3102bef3dbd1d0048b5d23b2c17b6032, type: 3}
       propertyPath: m_TagString
-      value: Ghost
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
