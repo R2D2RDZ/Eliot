@@ -20,12 +20,12 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0, g: 0.31946257, b: 0.9716981, a: 1}
+  m_AmbientSkyColor: {r: 0.4669811, g: 0.641072, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.637597, g: 0.7379107, b: 0.92158204, a: 1}
   m_AmbientGroundColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 1
-  m_SubtractiveShadowColor: {r: 0.48406905, g: 0.728747, b: 0.9245283, a: 1}
+  m_SubtractiveShadowColor: {r: 0, g: 0.5526314, b: 1, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: ad44620b576c78948957e3d3c3d643c2, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -613,7 +613,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ad44620b576c78948957e3d3c3d643c2, type: 2}
+  - {fileID: 2100000, guid: 133417561b6ee7347b98e077b77555c3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1832,7 +1832,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9037784568350176914, guid: 83267e3daf125e144b39ef1a252597c1, type: 3}
       propertyPath: sceneToLoad
-      value: Menu de Creditos
+      value: MenudeCreditos
       objectReference: {fileID: 0}
     - target: {fileID: 9099049138309406440, guid: 83267e3daf125e144b39ef1a252597c1, type: 3}
       propertyPath: m_LocalScale.x

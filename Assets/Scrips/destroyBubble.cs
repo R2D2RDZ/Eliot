@@ -22,16 +22,9 @@ public class destroyBubble : MonoBehaviour
     public void Pop()
     {
         _PS = Instantiate(_particleSystem,transform.position,Quaternion.identity);
-        Invoke("Destroy all", 1f);
         Destroy(this.gameObject);
 
     }
-
-    public void DestroyAll()
-    {
-        Destroy(_PS);
-    }
-
     public void Transition()
     {
         if (!string.IsNullOrEmpty(sceneToLoad))
