@@ -1,7 +1,6 @@
 using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.XR;
-using UnityEngine.SceneManagement; // Para cambiar de escena
 
 public class VRGun : MonoBehaviour
 {
@@ -19,10 +18,6 @@ public class VRGun : MonoBehaviour
     [Header("Controladores de las manos")]
     public Transform leftHandController; // Referencia al controlador de la mano izquierda
     public Transform rightHandController; // Referencia al Transform del RightHand Controller
-
-    [Header("Contador de Fantasmas")]
-    public int ghostCount = 0; // Número de fantasmas restantes
-    public Ghost ghostManager; // Referencia al script Ghost para obtener el conteo inicial
 
     private Transform currentHandController; // La mano actual que está agarrando el arma
     private bool isGripped = false; // Estado para saber si el arma está agarrada
@@ -50,12 +45,6 @@ public class VRGun : MonoBehaviour
             {
                 Debug.LogError("Left Controller no encontrado. Asegúrate de que está configurado en el XR Rig.");
             }
-        }
-
-        // Inicializar el contador de fantasmas
-        if (ghostManager != null)
-        {
-            ghostCount = ghostManager.spawnPoints.Length; // Número de puntos de spawn = número inicial de fantasmas
         }
     }
 
@@ -156,21 +145,5 @@ public class VRGun : MonoBehaviour
         {
             audioSource.PlayOneShot(shootSound); // Reproduce el sonido de disparo
         }
-    }
-
-    public void DecreaseGhostCount()
-    {
-        ghostCount--;
-
-        // Verificar si todos los fantasmas han sido destruidos
-        if (ghostCount <= 0)
-        {
-            ChangeScene(); // Cambiar a la escena "Pasillo"
-        }
-    }
-
-    void ChangeScene()
-    {
-        SceneManager.LoadScene("Pasillo"); // Cambiar a la escena llamada "Pasillo"
     }
 }

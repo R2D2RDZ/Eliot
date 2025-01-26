@@ -11,9 +11,13 @@ public class Ghost : MonoBehaviour
     private int ghostCount = 0; // Número de fantasmas activos
     private BackgroundMusicManager musicManager;
 
+    private Pasillo sceneChanger; // Referencia al SceneChanger
+
+
     void Start()
     {
         musicManager = Object.FindAnyObjectByType<BackgroundMusicManager>();
+        sceneChanger = FindAnyObjectByType<Pasillo>(); // Encuentra el controlador de escenas
     }
     public void SpawnGhosts()
     {
@@ -32,6 +36,7 @@ public class Ghost : MonoBehaviour
 
             // Configurar evento para reducir el conteo de fantasmas al destruirse
             ghost.GetComponent<GhostMovement>().OnDestroyed += DecreaseGhostCount;
+            movement.OnDestroyed += sceneChanger.DecreaseGhostCount;
 
             // Asegurarse de que el fantasma tenga el tag "Ghost"
             ghost.tag = "Ghost";
