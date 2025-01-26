@@ -10,6 +10,7 @@ public class VRGun : MonoBehaviour
     public float bulletSpeed = 5f; // Velocidad del proyectil
     public float grabDistance = 0.5f; // Distancia máxima para agarrar el arma
     public float shootDelay = 0.5f; // Tiempo entre disparos
+    public float maxDistanceFromHand = 150f; // Distancia máxima permitida antes de "resetear" el arma
 
     [Header("Controladores de las manos")]
     public Transform leftHandController; // Referencia al controlador de la mano izquierda
@@ -85,6 +86,12 @@ public class VRGun : MonoBehaviour
 
             // Invocar fantasmas desde el GhostController
             Object.FindAnyObjectByType<Ghost>().SpawnGhosts();
+
+            // Validar si el arma se aleja demasiado de la mano
+            if (Vector3.Distance(transform.position, currentHandController.position) > maxDistanceFromHand)
+            {
+                ResetPositionToHand();
+            }
         }
 
         // Detectar disparo con el controlador que sostiene el arma
@@ -136,5 +143,15 @@ public class VRGun : MonoBehaviour
 
         // Destruye la bala después de 2 segundos
         Destroy(bullet, 2f);
+    }
+
+    void ResetPositionToHand()
+    {
+        // Reposiciona el arma en la mano actual
+        if (currentHandController != null)
+        {
+            transform.position = currentHandController.position;
+            transform.rotation = currentHandController.rotation;
+        }
     }
 }
