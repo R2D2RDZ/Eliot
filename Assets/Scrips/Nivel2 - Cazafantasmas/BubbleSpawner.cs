@@ -4,6 +4,8 @@ public class BubbleSpawner : MonoBehaviour
 {
     public GameObject bubblePrefab; // Prefab de la burbuja
     private GameObject door; // Referencia al objeto de la puerta
+    public Vector3 offset = new Vector3(0, 2, 0);
+    public GameObject[] ghosts;
 
     void Start()
     {
@@ -18,7 +20,7 @@ public class BubbleSpawner : MonoBehaviour
     void Update()
     {
         // Revisa si no quedan fantasmas en la escena
-        GameObject[] ghosts = GameObject.FindGameObjectsWithTag("Ghost");
+        ghosts = GameObject.FindGameObjectsWithTag("Ghost");
         if (ghosts.Length == 0)
         {
             SpawnBubble();
@@ -32,7 +34,9 @@ public class BubbleSpawner : MonoBehaviour
         if (existingBubble == null && door != null)
         {
             // Instancia la burbuja en la posición de la puerta
-            Instantiate(bubblePrefab, door.transform.position, Quaternion.identity).tag = "Bubble";
+            GameObject bubble = Instantiate(bubblePrefab, door.transform.position + offset, Quaternion.identity);
+            bubble.tag = "Bubble";
+            bubble.GetComponent<destroyBubble>().sceneToLoad = "Pasillo";
             Debug.Log("Burbuja generada en la puerta.");
         }
     }

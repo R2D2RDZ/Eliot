@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PlayerJump : MonoBehaviour
@@ -9,16 +10,21 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private float jumpHeight = 3f;
     [SerializeField] private LayerMask groundLayers;
     [SerializeField] private LayerMask bounceLayers;
+    [SerializeField] private LayerMask lavaLayers;
     [SerializeField] private TMP_Text console;
 
     [SerializeField] private float gravity = -9.81f;
     private Vector3 movement;
-    private float radius = 0.3f;
+    private float radius = 0.03f;
 
     private void Update()
     {
-        console.text = transform.position.ToString();
-        console.text += "\n" + movement;
+        //console.text = transform.position.ToString();
+        //console.text += "\n" + movement;
+        if (Physics.CheckSphere(transform.position, radius, lavaLayers))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
 
         bool isGrounded = IsGrounded();
         bool isBounce = IsBounce();
@@ -32,14 +38,14 @@ public class PlayerJump : MonoBehaviour
         // Contacto con el suelo
         if (isGrounded)
         {
-            console.text += "\nIsGrounded";
+            //console.text += "\nIsGrounded";
             movement.y = -1f; // Mantener contacto con el suelo.
         }
 
         // Rebote
         if (isBounce)
         {
-            console.text += "\nIsBounce";
+            //console.text += "\nIsBounce";
             Bounce();
         }
 
