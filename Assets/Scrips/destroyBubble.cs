@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class destroyBubble : MonoBehaviour
 {
     [SerializeField] ParticleSystem _particleSystem;
     ParticleSystem _PS;
+
+    public string sceneToLoad;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -27,5 +30,13 @@ public class destroyBubble : MonoBehaviour
     public void DestroyAll()
     {
         Destroy(_PS);
+    }
+
+    public void Transition()
+    {
+        if (!string.IsNullOrEmpty(sceneToLoad))
+        {
+            SceneManager.LoadScene(sceneToLoad);
+        }
     }
 }
