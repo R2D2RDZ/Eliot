@@ -1832,7 +1832,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9037784568350176914, guid: 83267e3daf125e144b39ef1a252597c1, type: 3}
       propertyPath: sceneToLoad
-      value: Menu de Creditos
+      value: MenudeCreditos
       objectReference: {fileID: 0}
     - target: {fileID: 9099049138309406440, guid: 83267e3daf125e144b39ef1a252597c1, type: 3}
       propertyPath: m_LocalScale.x
