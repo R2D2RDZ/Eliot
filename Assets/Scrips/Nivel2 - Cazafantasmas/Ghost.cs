@@ -1,38 +1,5 @@
 using UnityEngine;
-
-/*public class Ghost : MonoBehaviour
-{
-    public GameObject ghostPrefab; // Prefab base de los fantasmas
-    public int numberOfGhosts = 3; // Número de fantasmas a generar
-    public Vector3 roomBounds = new Vector3(24f, 8f, 24f); // Límites de la habitación
-
-    private bool ghostsSpawned = false; // Verificar si los fantasmas ya fueron generados
-
-    public void SpawnGhosts()
-    {
-        if (ghostsSpawned) return;
-
-        for (int i = 0; i < numberOfGhosts; i++)
-        {
-            Vector3 randomPosition = GetRandomPosition();
-            Instantiate(ghostPrefab, randomPosition, Quaternion.identity);
-        }
-
-        ghostsSpawned = true; // Marcar como generados
-    }
-
-    private Vector3 GetRandomPosition()
-    {
-        return new Vector3(
-            Random.Range(-roomBounds.x / 2f, roomBounds.x / 2f),
-            Random.Range(0f, roomBounds.y),
-            Random.Range(-roomBounds.z / 2f, roomBounds.z / 2f)
-        );
-    }
-}*/
-
-
-/*public class Ghost : MonoBehaviour
+public class Ghost : MonoBehaviour
 {
     [Header("Configuración de los fantasmas")]
     public GameObject ghostPrefab; // Prefab del fantasma
@@ -129,7 +96,7 @@ public class GhostMovement : MonoBehaviour
         }
 
         // Verifica si el objeto que colisionó tiene el tag "BurbujaBala"
-        if (collision.gameObject.CompareTag("BurbujaBala"))
+        if (collision.gameObject.CompareTag("BalaBurbuja"))
         {
             StopGhost(); // Detener al fantasma
         }
@@ -142,107 +109,5 @@ public class GhostMovement : MonoBehaviour
         Debug.Log($"{gameObject.name} ha sido detenido.");
         //Destroy(gameObject, 2f); // Destruir el fantasma después de 2 segundos
     }
-}*/
-
-
-/*public class Ghost : MonoBehaviour
-{
-    public GameObject slowGhostPrefab;
-    public GameObject moderateGhostPrefab;
-    public GameObject fastGhostPrefab;
-
-    public int numberOfEachType = 3; // Número de cada tipo de fantasma
-    public Vector3 roomBounds = new Vector3(24f, 8f, 24f);
-
-    private bool ghostsSpawned = false;
-
-    public void SpawnGhosts()
-    {
-        if (ghostsSpawned) return;
-
-        // Generar fantasmas lentos
-        for (int i = 0; i < numberOfEachType; i++)
-        {
-            Instantiate(slowGhostPrefab, GetRandomPosition(), Quaternion.identity);
-        }
-
-        // Generar fantasmas moderados
-        for (int i = 0; i < numberOfEachType; i++)
-        {
-            Instantiate(moderateGhostPrefab, GetRandomPosition(), Quaternion.identity);
-        }
-
-        // Generar fantasmas rápidos
-        for (int i = 0; i < numberOfEachType; i++)
-        {
-            Instantiate(fastGhostPrefab, GetRandomPosition(), Quaternion.identity);
-        }
-
-        ghostsSpawned = true;
-    }
-
-    private Vector3 GetRandomPosition()
-    {
-        return new Vector3(
-            Random.Range(-roomBounds.x / 2f, roomBounds.x / 2f),
-            Random.Range(0f, roomBounds.y),
-            Random.Range(-roomBounds.z / 2f, roomBounds.z / 2f)
-        );
-    }
-}*/
-
-/*public abstract class GhostMovement : MonoBehaviour
-{
-    public float speed; // Velocidad del fantasma
-    public Vector3 roomBounds = new Vector3(24f, 8f, 24f); // Límites de la habitación
-    protected Transform player; // Referencia al jugador
-    protected bool isStopped = false; // Estado para detener al fantasma
-
-    public virtual void Start()
-    {
-        // Encontrar al jugador por su tag
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-    }
-
-    public virtual void Update()
-    {
-        if (!isStopped)
-        {
-            Move(); // Comportamiento de movimiento definido en cada tipo de fantasma
-            HandleObstacles(); // Esquivar obstáculos
-        }
-    }
-
-    protected abstract void Move(); // Cada fantasma define su propio movimiento
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("BurbujaBala"))
-        {
-            StopGhost();
-        }
-    }
-
-    private void StopGhost()
-    {
-        isStopped = true;
-        speed = 0f;
-        Destroy(gameObject, 2f); // Destruir el fantasma después de 2 segundos
-    }
-
-    private void HandleObstacles()
-    {
-        // Esquivar obstáculos con el tag "Muebles"
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 1f))
-        {
-            if (hit.collider.CompareTag("Muebles"))
-            {
-                // Cambiar dirección ligeramente
-                transform.Rotate(0, Random.Range(45f, 135f), 0);
-            }
-        }
-    }
-}*/
-
+}
 
