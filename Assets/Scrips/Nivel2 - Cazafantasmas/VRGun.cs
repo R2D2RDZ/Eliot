@@ -11,11 +11,13 @@ public class VRGun : MonoBehaviour
     public float grabDistance = 0.5f; // Distancia máxima para agarrar el arma
     public float shootDelay = 0.5f; // Tiempo entre disparos
     public float maxDistanceFromHand = 150f; // Distancia máxima permitida antes de "resetear" el arma
+    public Vector3 offsetAboveTable = new Vector3(0, 0.2f, 0); // Offset para posicionar el arma sobre la mesa
 
     [Header("Controladores de las manos")]
     public Transform leftHandController; // Referencia al controlador de la mano izquierda
     public Transform rightHandController; // Referencia al Transform del RightHand Controller
 
+    public Transform mesa; // Referencia al objeto "mesa"
     private Transform currentHandController; // La mano actual que está agarrando el arma
     public bool isGripped = false; // Estado para saber si el arma está agarrada
     public bool isShooting = false;
@@ -41,6 +43,20 @@ public class VRGun : MonoBehaviour
             if (leftHandController == null)
             {
                 Debug.LogError("Left Controller no encontrado. Asegúrate de que está configurado en el XR Rig.");
+            }
+        }
+
+        // Buscar automáticamente la mesa si no está asignada
+        if (mesa == null)
+        {
+            GameObject mesaObject = GameObject.Find("mesa");
+            if (mesaObject != null)
+            {
+                mesa = mesaObject.transform;
+            }
+            else
+            {
+                Debug.LogError("Objeto 'mesa' no encontrado en la escena. Asegúrate de nombrarlo correctamente.");
             }
         }
     }
@@ -90,7 +106,7 @@ public class VRGun : MonoBehaviour
             // Validar si el arma se aleja demasiado de la mano
             if (Vector3.Distance(transform.position, currentHandController.position) > maxDistanceFromHand)
             {
-                ResetPositionToHand();
+                ResetPosition();
             }
         }
 
@@ -145,13 +161,13 @@ public class VRGun : MonoBehaviour
         Destroy(bullet, 2f);
     }
 
-    void ResetPositionToHand()
+    void ResetPosition()
     {
-        // Reposiciona el arma en la mano actual
-        if (currentHandController != null)
+        // Reposiciona el arma 
+        if (mesa != null)
         {
-            transform.position = currentHandController.position;
-            transform.rotation = currentHandController.rotation;
+            transform.position = mesa.position + offsetAboveTable;
+            transform.rotation = Quaternion.identity; // Restablece la rotación del arma
         }
     }
 }

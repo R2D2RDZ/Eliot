@@ -39,7 +39,7 @@ public class MusicManager : MonoBehaviour
         else if (NoGhostsAlive())
         {
             // Cambiar a la música calmada si no hay fantasmas
-            PlayMusic(actionMusic);
+            PlayMusic(endMusic);
         }
         else
         {
