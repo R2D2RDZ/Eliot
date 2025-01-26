@@ -2278,6 +2278,10 @@ PrefabInstance:
       value: Arma
       objectReference: {fileID: 0}
     - target: {fileID: 8821539334643910679, guid: 27381cc40dd6a624b98efc3c032a02e4, type: 3}
+      propertyPath: shootSound
+      value: 
+      objectReference: {fileID: 8300000, guid: c03ecad6ea57a41488bd1656cd53e2b6, type: 3}
+    - target: {fileID: 8821539334643910679, guid: 27381cc40dd6a624b98efc3c032a02e4, type: 3}
       propertyPath: bulletSpeed
       value: 5
       objectReference: {fileID: 0}
