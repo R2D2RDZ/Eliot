@@ -598,6 +598,59 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27381cc40dd6a624b98efc3c032a02e4, type: 3}
+--- !u!1 &692162311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 692162313}
+  - component: {fileID: 692162312}
+  m_Layer: 0
+  m_Name: GhostManagment (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &692162312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692162311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94c3e210e023f1448b5661ecbb1b2f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowGhostPrefab: {fileID: 2043950669}
+  moderateGhostPrefab: {fileID: 2043950669}
+  fastGhostPrefab: {fileID: 2043950669}
+  spawnPoints:
+  - {fileID: 1574307495}
+  movementSpeed: 2.5
+  slowChance: 0
+  moderateChance: 100
+  fastChance: 0
+--- !u!4 &692162313
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692162311}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.1987786, y: 3.3399224, z: 6.3880544}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &756192406
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,6 +1203,90 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1543675797}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1567637212
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1567637214}
+  - component: {fileID: 1567637213}
+  m_Layer: 0
+  m_Name: GhostManagment (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1567637213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567637212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94c3e210e023f1448b5661ecbb1b2f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowGhostPrefab: {fileID: 2043950669}
+  moderateGhostPrefab: {fileID: 2043950669}
+  fastGhostPrefab: {fileID: 2043950669}
+  spawnPoints:
+  - {fileID: 1939755566}
+  movementSpeed: 2.5
+  slowChance: 0
+  moderateChance: 0
+  fastChance: 100
+--- !u!4 &1567637214
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567637212}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.1987786, y: 3.3399224, z: 6.3880544}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1574307494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1574307495}
+  m_Layer: 0
+  m_Name: Spawn (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1574307495
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574307494}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.19, y: 3.3399224, z: 7.314}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1594817962
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,6 +1586,37 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 6558622148059887818, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   handAnimator: {fileID: 1882164688}
+--- !u!1 &1939755565
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1939755566}
+  m_Layer: 0
+  m_Name: Spawn (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1939755566
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939755565}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.15, y: 3.3399224, z: 7.314}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2043950668
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1463,7 +1631,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3228245423956512744, guid: 46c068868d01f2c43a03c89a6edd95e2, type: 3}
       propertyPath: m_Name
-      value: SlowGhost
+      value: Ghost
       objectReference: {fileID: 0}
     - target: {fileID: 5770846332903469655, guid: 46c068868d01f2c43a03c89a6edd95e2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1637,10 +1805,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94c3e210e023f1448b5661ecbb1b2f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghostPrefab: {fileID: 2043950669}
+  slowGhostPrefab: {fileID: 2043950669}
+  moderateGhostPrefab: {fileID: 2043950669}
+  fastGhostPrefab: {fileID: 2043950669}
   spawnPoints:
   - {fileID: 1734016760}
   movementSpeed: 2.5
+  slowChance: 100
+  moderateChance: 0
+  fastChance: 0
 --- !u!4 &2117721896
 Transform:
   m_ObjectHideFlags: 0
@@ -1670,4 +1843,8 @@ SceneRoots:
   - {fileID: 616336721}
   - {fileID: 2043950668}
   - {fileID: 2117721896}
+  - {fileID: 692162313}
+  - {fileID: 1567637214}
   - {fileID: 1734016760}
+  - {fileID: 1574307495}
+  - {fileID: 1939755566}
