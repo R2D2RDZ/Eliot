@@ -191,7 +191,7 @@ public class GhostMovement : MonoBehaviour
     }
 }*/
 
-public abstract class GhostMovement : MonoBehaviour
+/*public abstract class GhostMovement : MonoBehaviour
 {
     public float speed; // Velocidad del fantasma
     public Vector3 roomBounds = new Vector3(24f, 8f, 24f); // Límites de la habitación
@@ -243,6 +243,6 @@ public abstract class GhostMovement : MonoBehaviour
             }
         }
     }
-}
+}*/
 
 

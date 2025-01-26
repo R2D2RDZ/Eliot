@@ -12,6 +12,41 @@ using UnityEngine;
         transform.position = new Vector3(x, transform.position.y, z);
     }
 }*/
+
+public class SlowGhost : MonoBehaviour
+{
+    [Header("Configuración de los fantasmas")]
+    public GameObject ghostPrefab; // Prefab del fantasma
+    public Transform[] spawnPoints; // Puntos donde aparecerán los fantasmas
+    public float movementSpeed = 2.5f; // Velocidad de movimiento de los fantasmas
+    public string furnitureTag = "Mueble"; // Tag de los muebles para esquivar
+    public string bulletTag = "BurbujaBala"; // Tag de las balas para detener al fantasma
+
+    private bool ghostsSpawned = false; // Verifica si los fantasmas ya aparecieron
+
+    public void SpawnGhosts()
+    {
+        if (ghostsSpawned) return; // Evitar que se invoquen varias veces
+
+        // Crear un fantasma en cada punto de aparición
+        foreach (Transform spawnPoint in spawnPoints)
+        {
+            GameObject ghost = Instantiate(ghostPrefab, spawnPoint.position, spawnPoint.rotation);
+
+            // Configurar su movimiento
+            GhostMovement movement = ghost.AddComponent<GhostMovement>();
+            movement.speed = movementSpeed;
+            movement.furnitureTag = furnitureTag;
+            movement.bulletTag = bulletTag;
+
+            // Asegurarse de que el fantasma tenga el tag "Ghost"
+            ghost.tag = "Ghost";
+        }
+
+        ghostsSpawned = true; // Marcar que los fantasmas ya fueron generados
+    }
+}
+
 public class GhostMovement : MonoBehaviour
 {
     public float speed; // Velocidad del fantasma
