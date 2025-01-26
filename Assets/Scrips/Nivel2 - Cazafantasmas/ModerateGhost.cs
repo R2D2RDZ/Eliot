@@ -20,28 +20,23 @@ using UnityEngine;
     }
 }*/
 
-public class ModerateGhost : GhostMovement
+public class ModerateGhost : MonoBehaviour
 {
-    private float zigzagTimer = 0f; // Temporizador para cambiar de dirección
-    private int direction = 1; // Dirección del zigzag
+    public float speed = 4f; // Velocidad moderada
+    public float zigzagDistance = 3f; // Amplitud del zigzag
 
-    void Awake()
+    private float zigzagTime;
+
+    void Update()
     {
-        speed = 10f; // Velocidad para fantasmas lentos
-    }
-    protected override void Move()
-    {
-        zigzagTimer += Time.deltaTime;
-        if (zigzagTimer > 1f) // Cambiar dirección cada segundo
+        zigzagTime += Time.deltaTime;
+        Vector3 zigzagMovement = new Vector3(Mathf.Sin(zigzagTime * speed) * zigzagDistance, 0, speed * Time.deltaTime);
+        Vector3 nextPosition = transform.position + zigzagMovement;
+
+        if (!Physics.CheckSphere(nextPosition, 0.5f)) // Evita colisiones con muebles
         {
-            direction *= -1;
-            zigzagTimer = 0f;
+            transform.position = nextPosition;
         }
-
-        // Movimiento hacia adelante con desviación en zigzag
-        Vector3 forward = transform.forward * speed * Time.deltaTime;
-        Vector3 sideways = transform.right * direction * speed * 0.5f * Time.deltaTime;
-        transform.position += forward + sideways;
     }
 }
 

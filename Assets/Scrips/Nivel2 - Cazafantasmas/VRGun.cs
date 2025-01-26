@@ -2,7 +2,7 @@ using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class VRGun : MonoBehaviour
+/*public class VRGun : MonoBehaviour
 {
     [Header("Configuración del arma")]
     public GameObject bulletPrefab; // Prefab del proyectil
@@ -119,8 +119,103 @@ public class VRGun : MonoBehaviour
         // Destruye la bala después de 2 segundos
         Destroy(bullet, 2f);
     }
-}
+}*/
 
+public class VRGun : MonoBehaviour
+{
+    [Header("Configuración del arma")]
+    public GameObject bulletPrefab; // Prefab del proyectil
+    public Transform firePoint; // Punto desde donde se dispararán las balas
+    public float bulletSpeed = 5f; // Velocidad del proyectil
+    public float grabDistance = 0.5f; // Distancia máxima para agarrar el arma
+
+    [Header("Controladores de las manos")]
+    public Transform leftHandController;
+    public Transform rightHandController;
+
+    public delegate void WeaponGrabbedHandler(); // Evento para notificar cuando el arma es agarrada
+    public static event WeaponGrabbedHandler OnWeaponGrabbed;
+
+    private Transform currentHandController;
+    private bool isGripped = false;
+
+    void Start()
+    {
+        var xrRig = GameObject.FindFirstObjectByType<XROrigin>();
+
+        if (leftHandController == null || rightHandController == null)
+        {
+            if (xrRig != null)
+            {
+                leftHandController = xrRig.transform.Find("Camera Offset/Left Controller");
+                rightHandController = xrRig.transform.Find("Camera Offset/Right Controller");
+            }
+
+            if (rightHandController == null)
+                Debug.LogError("Right Controller no encontrado. Asegúrate de que está configurado en el XR Rig.");
+            if (leftHandController == null)
+                Debug.LogError("Left Controller no encontrado. Asegúrate de que está configurado en el XR Rig.");
+        }
+    }
+
+    void Update()
+    {
+        if (rightHandController == null || leftHandController == null) return;
+
+        InputDevice leftHand = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
+        InputDevice rightHand = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
+
+        leftHand.TryGetFeatureValue(CommonUsages.gripButton, out bool leftGripValue);
+        rightHand.TryGetFeatureValue(CommonUsages.gripButton, out bool rightGripValue);
+
+        float distanceToLeftHand = Vector3.Distance(transform.position, leftHandController.position);
+        float distanceToRightHand = Vector3.Distance(transform.position, rightHandController.position);
+
+        if (leftGripValue && distanceToLeftHand <= grabDistance)
+        {
+            isGripped = true;
+            currentHandController = leftHandController;
+            OnWeaponGrabbed?.Invoke(); // Notificar que el arma fue agarrada
+        }
+        else if (rightGripValue && distanceToRightHand <= grabDistance)
+        {
+            isGripped = true;
+            currentHandController = rightHandController;
+            OnWeaponGrabbed?.Invoke(); // Notificar que el arma fue agarrada
+        }
+        else
+        {
+            isGripped = false;
+            currentHandController = null;
+        }
+
+        if (isGripped && currentHandController != null)
+        {
+            transform.position = currentHandController.position;
+            transform.rotation = currentHandController.rotation;
+
+            if (currentHandController == leftHandController)
+            {
+                if (leftHand.TryGetFeatureValue(CommonUsages.triggerButton, out bool leftTriggerValue) && leftTriggerValue)
+                    Shoot();
+            }
+            else if (currentHandController == rightHandController)
+            {
+                if (rightHand.TryGetFeatureValue(CommonUsages.triggerButton, out bool rightTriggerValue) && rightTriggerValue)
+                    Shoot();
+            }
+        }
+    }
+
+    void Shoot()
+    {
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        if (rb != null)
+            rb.linearVelocity = firePoint.forward * bulletSpeed;
+        Destroy(bullet, 2f);
+    }
+}
 
 /*public class VRGun : MonoBehaviour
 {

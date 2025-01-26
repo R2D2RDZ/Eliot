@@ -33,38 +33,32 @@ using UnityEngine;
     }
 }*/
 
-public class FastGhost : GhostMovement
+public class FastGhost : MonoBehaviour
 {
-    private float angle = 0f; // Para movimiento circular
-    private float zigzagTimer = 0f; // Para zigzag
-    private int direction = 1; // Dirección del zigzag
+    public float speed = 6f;
+    public float zigzagDistance = 3f;
+    public float hideDistance = 2f;
 
-    void Awake()
+    private Transform player;
+
+    void Start()
     {
-        speed = 15f; // Velocidad para fantasmas lentos
+        player = GameObject.FindWithTag("Player").transform; // Encuentra al jugador
     }
-    protected override void Move()
+
+    void Update()
     {
-        // Combinación de círculo y zigzag
-        angle += speed * Time.deltaTime;
-        float x = Mathf.Cos(angle) * roomBounds.x / 6f; // Movimiento circular en X
-        float z = Mathf.Sin(angle) * roomBounds.z / 6f; // Movimiento circular en Z
-        transform.position += new Vector3(x, transform.position.y, z) * Time.deltaTime;
+        Vector3 toPlayer = player.position - transform.position;
 
-        zigzagTimer += Time.deltaTime;
-        if (zigzagTimer > 0.5f) // Zigzag rápido
+        if (toPlayer.magnitude > hideDistance) // Movimiento en zigzag si está lejos del jugador
         {
-            direction *= -1;
-            zigzagTimer = 0f;
+            Vector3 zigzagMovement = new Vector3(Mathf.Sin(Time.time * speed) * zigzagDistance, 0, speed * Time.deltaTime);
+            transform.position += zigzagMovement;
         }
-        transform.position += transform.right * direction * speed * 0.3f * Time.deltaTime;
-
-        // Esconderse si está cerca del jugador
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        if (distanceToPlayer < 5f) // Distancia para esconderse
+        else // Movimiento para esconderse detrás del jugador
         {
-            Vector3 hideDirection = (transform.position - player.position).normalized;
-            transform.position += hideDirection * speed * Time.deltaTime;
+            Vector3 hidePosition = player.position - toPlayer.normalized * hideDistance;
+            transform.position = Vector3.Lerp(transform.position, hidePosition, Time.deltaTime * speed);
         }
     }
 }

@@ -145,7 +145,7 @@ public class GhostMovement : MonoBehaviour
 }*/
 
 
-public class Ghost : MonoBehaviour
+/*public class Ghost : MonoBehaviour
 {
     public GameObject slowGhostPrefab;
     public GameObject moderateGhostPrefab;
@@ -189,5 +189,5 @@ public class Ghost : MonoBehaviour
             Random.Range(-roomBounds.z / 2f, roomBounds.z / 2f)
         );
     }
-}
+}*/
 
