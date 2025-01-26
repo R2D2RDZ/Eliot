@@ -1,6 +1,6 @@
 using UnityEngine;
 
-/*public class GhostMovement : MonoBehaviour
+public class GhostMovement : MonoBehaviour
 {
     public float speed; // Velocidad del fantasma
     public Vector3 roomBounds = new Vector3(24f, 8f, 24f); // Límites de la habitación (x, y, z)
@@ -79,9 +79,9 @@ using UnityEngine;
         speed = 0f; // Asegurarse de que la velocidad sea 0
         //Destroy(gameObject, 2f); // Destruir el fantasma después de 2 segundos
     }
-}*/
+}
 
-public class SlowGhostMovement : MonoBehaviour
+/*public class SlowGhostMovement : MonoBehaviour
 {
     public float speed = 1f; // Velocidad lenta del fantasma
     public float circleRadius = 2f; // Radio del círculo
@@ -128,5 +128,5 @@ public class SlowGhostMovement : MonoBehaviour
         isStopped = true; // Cambiar el estado para detener el movimiento
         speed = 0f; // Asegurarse de que la velocidad sea 0
     }
-}
+}*/
 
