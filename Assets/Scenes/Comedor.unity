@@ -204,6 +204,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94c3e210e023f1448b5661ecbb1b2f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ghostPrefab: {fileID: 0}
+  spawnPoints: []
+  movementSpeed: 2.5
 --- !u!114 &65951493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -714,7 +717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalRotation.x
@@ -722,7 +725,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalRotation.z
@@ -734,7 +737,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1290,15 +1293,15 @@ PrefabInstance:
       objectReference: {fileID: 6079993608427627781, guid: b697aa1717fcd96419c69736f50a1a9c, type: 3}
     - target: {fileID: 5827059171463839537, guid: 27381cc40dd6a624b98efc3c032a02e4, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5827059171463839537, guid: 27381cc40dd6a624b98efc3c032a02e4, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5827059171463839537, guid: 27381cc40dd6a624b98efc3c032a02e4, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5827059171463839537, guid: 27381cc40dd6a624b98efc3c032a02e4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2052,6 +2055,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94c3e210e023f1448b5661ecbb1b2f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ghostPrefab: {fileID: 0}
+  spawnPoints: []
+  movementSpeed: 2.5
 --- !u!114 &843569868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5171,6 +5177,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94c3e210e023f1448b5661ecbb1b2f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ghostPrefab: {fileID: 0}
+  spawnPoints: []
+  movementSpeed: 2.5
 --- !u!4 &2083523474 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1670256625, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
