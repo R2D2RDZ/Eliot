@@ -1,6 +1,6 @@
 using UnityEngine;
 
-/*public class Ghost : MonoBehaviour
+public class Ghost : MonoBehaviour
 {
     [Header("Configuración de los fantasmas")]
     public GameObject ghostPrefab; // Prefab del fantasma
@@ -28,9 +28,9 @@ using UnityEngine;
 
         ghostsSpawned = true; // Marcar que los fantasmas ya fueron generados
     }
-}*/
+}
 
-public class Ghost : MonoBehaviour
+/*public class Ghost : MonoBehaviour
 {
     [Header("Configuración de los fantasmas")]
     public GameObject slowGhostPrefab; // Prefab del fantasma Slow
@@ -94,4 +94,4 @@ public class Ghost : MonoBehaviour
             return fastGhostPrefab; // Selecciona Fast
         }
     }
-}
+}*/
