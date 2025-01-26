@@ -2440,6 +2440,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &616336728 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8821539334643910679, guid: 27381cc40dd6a624b98efc3c032a02e4, type: 3}
+  m_PrefabInstance: {fileID: 616336721}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616336722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc12f892b78e3347a810d1ad8c70843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &644925262
 GameObject:
   m_ObjectHideFlags: 0
@@ -6007,7 +6018,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2.76
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6060,6 +6071,10 @@ PrefabInstance:
     - target: {fileID: 5663893676086941514, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_TeleportInteractor
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6232745470614056090, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_StepOffset
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -6287,7 +6302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2764036248628447766, guid: 560f6a67fdf35234c989dc7a07cf87b9, type: 3}
       propertyPath: spawnPoints.Array.size
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2764036248628447766, guid: 560f6a67fdf35234c989dc7a07cf87b9, type: 3}
       propertyPath: 'spawnPoints.Array.data[0]'
@@ -8067,11 +8082,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c882664d9048c604ba313b50c354372d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialMusic: {fileID: 8300000, guid: dbf3b228f43b16d43b3b6be634812488, type: 3}
-  actionMusic: {fileID: 8300000, guid: 5efa1d26e57210e40866048a4b467d17, type: 3}
-  endMusic: {fileID: 8300000, guid: 31368e16cfbcb1a418f3bbf9d8fd38d1, type: 3}
+  defaultMusic: {fileID: 8300000, guid: 5efa1d26e57210e40866048a4b467d17, type: 3}
+  combatMusic: {fileID: 8300000, guid: dbf3b228f43b16d43b3b6be634812488, type: 3}
+  calmMusic: {fileID: 8300000, guid: 31368e16cfbcb1a418f3bbf9d8fd38d1, type: 3}
   audioSource: {fileID: 616336724}
-  gunScript: {fileID: 0}
+  gunScript: {fileID: 616336728}
   ghosts: []
 --- !u!4 &2087896443
 Transform:

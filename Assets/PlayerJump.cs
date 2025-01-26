@@ -6,84 +6,76 @@ public class PlayerJump : MonoBehaviour
 {
     [SerializeField] private InputActionProperty jumpButton;
     [SerializeField] private CharacterController cc;
-    [SerializeField] private float jumpHeight = 15f;
+    [SerializeField] private float jumpHeight = 3f;
     [SerializeField] private LayerMask groundLayers;
     [SerializeField] private LayerMask bounceLayers;
-    [SerializeField] TMP_Text console;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private TMP_Text console;
 
-    [SerializeField] private float gravity = Physics.gravity.y;
+    [SerializeField] private float gravity = -9.81f;
     private Vector3 movement;
-    float radius = 0.05f;
+    private float radius = 0.3f;
 
     private void Update()
     {
+        console.text = transform.position.ToString();
+        console.text += "\n" + movement;
 
-        /*console.text = transform.position.ToString();
-        console.text += "\n" + movement;*/
-        bool _isGrounded = IsGrounded();
-        bool _isBounce = IsBounce();
-        if (!_isGrounded || !_isBounce)
+        bool isGrounded = IsGrounded();
+        bool isBounce = IsBounce();
+
+        // Gravedad
+        if (!isGrounded && !isBounce)
         {
             movement.y += gravity * Time.deltaTime;
         }
-        
-        if (_isBounce)
+
+        // Contacto con el suelo
+        if (isGrounded)
         {
-           //console.text += "\nIsBounce";
-            _isGrounded = true;
+            console.text += "\nIsGrounded";
+            movement.y = -1f; // Mantener contacto con el suelo.
+        }
+
+        // Rebote
+        if (isBounce)
+        {
+            console.text += "\nIsBounce";
             Bounce();
         }
-        if (jumpButton.action.WasPressedThisFrame())
+
+        // Salto
+        if (jumpButton.action.WasPressedThisFrame() && isGrounded)
         {
             Debug.Log("Button pressed");
-            if (_isGrounded)
-            {
-                Debug.Log("entro al if");
-                //console.text = "Salto";
-                Jump();
-            }
-            //console.text = "A Pressed";
+            Jump();
         }
-
-        
-
 
         cc.Move(movement * Time.deltaTime);
+    }
 
-        
-    }
-    void FixedUpdate(){
-        //if (_isGrounded)
-        {
-            //console.text += "\nIsGrounded";
-            //movement = Vector3.down;
-        }
-    }
     private bool IsGrounded()
     {
-        
         return Physics.CheckSphere(transform.position, radius, groundLayers);
     }
 
     private bool IsBounce()
     {
-        
         return Physics.CheckSphere(transform.position, radius, bounceLayers);
     }
 
     private void Jump()
     {
-        movement.y = jumpHeight * -1.0f * gravity; 
+        movement.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
     }
+
     private void Bounce()
     {
-        movement.y = jumpHeight * -2.5f * gravity;
+        movement.y = Mathf.Sqrt(jumpHeight * -2.5f * gravity);
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position,radius);
+        Gizmos.DrawSphere(transform.position, radius);
     }
 }
