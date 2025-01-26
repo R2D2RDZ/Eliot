@@ -15,12 +15,12 @@ using UnityEngine;
 
 using System.Collections.Generic;
 
-public class GhostController : MonoBehaviour
+public class SlowGhost : MonoBehaviour
 {
     [Header("Configuración de fantasmas")]
     public GameObject ghostPrefab; // Prefab de los fantasmas
     public int ghostCount = 5; // Cantidad de fantasmas a generar
-    public float spawnRadius = 2f; // Radio de aparición de los fantasmas
+    public float spawnRadius = 0.5f; // Radio de aparición de los fantasmas
     public float moveSpeed = 1f; // Velocidad de movimiento circular de los fantasmas
     public float rotationSpeed = 50f; // Velocidad de rotación del movimiento circular
 
