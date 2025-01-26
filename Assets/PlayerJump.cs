@@ -12,53 +12,75 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] TMP_Text console;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    private float gravity = Physics.gravity.y;
+    [SerializeField] private float gravity = Physics.gravity.y;
     private Vector3 movement;
+    float radius = 0.05f;
 
     private void Update()
     {
+
         console.text = transform.position.ToString();
+        console.text += "\n" + movement;
         bool _isGrounded = IsGrounded();
         bool _isBounce = IsBounce();
-        if (jumpButton.action.WasPressedThisFrame())
+        if (!_isGrounded || !_isBounce)
         {
-            Debug.Log("Button pressed");
-            //console.text = "A Pressed";
+            movement.y += gravity * Time.deltaTime;
         }
-        if (jumpButton.action.WasPressedThisFrame() && _isGrounded)
+        if (_isGrounded)
         {
-            Debug.Log("entro al if");
-            //console.text = "Salto";
-            Jump();
+            console.text += "\nIsGrounded";
+            movement = Vector3.down;
         }
         if (_isBounce)
         {
             console.text += "\nIsBounce";
+            _isGrounded = true;
             Bounce();
         }
+        if (jumpButton.action.WasPressedThisFrame())
+        {
+            Debug.Log("Button pressed");
+            if (_isGrounded)
+            {
+                Debug.Log("entro al if");
+                //console.text = "Salto";
+                Jump();
+            }
+            //console.text = "A Pressed";
+        }
 
-        movement.y += gravity * Time.deltaTime;
+        
+
 
         cc.Move(movement * Time.deltaTime);
+
+        
     }
     private bool IsGrounded()
     {
         
-        return Physics.CheckSphere(transform.position, 0.3f, groundLayers);
+        return Physics.CheckSphere(transform.position, radius, groundLayers);
     }
 
     private bool IsBounce()
     {
         
-        return Physics.CheckSphere(transform.position, 0.3f, bounceLayers);
+        return Physics.CheckSphere(transform.position, radius, bounceLayers);
     }
 
     private void Jump()
     {
-        movement.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity); 
+        movement.y = jumpHeight * -1.0f * gravity; 
     }
     private void Bounce()
     {
-        movement.y = Mathf.Sqrt(jumpHeight * -20.0f * gravity);
+        movement.y = jumpHeight * -2.5f * gravity;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position,radius);
     }
 }
