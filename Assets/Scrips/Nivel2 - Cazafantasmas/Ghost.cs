@@ -106,7 +106,6 @@ public class GhostMovement : MonoBehaviour
     {
         isStopped = true; // Cambiar el estado para detener el movimiento
         speed = 0f; // Asegurarse de que la velocidad sea 0
-        Debug.Log($"{gameObject.name} ha sido detenido.");
         //Destroy(gameObject, 2f); // Destruir el fantasma después de 2 segundos
     }
 }
