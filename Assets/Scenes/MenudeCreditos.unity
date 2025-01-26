@@ -320,8 +320,15 @@ MonoBehaviour:
   playerCamera: {fileID: 802321642071964013}
   bubbleText: {fileID: 57530}
   possibleTexts:
-  - Juan Perez
-  - Pedro Gomez
+  - Karen Yazmin Cordova Flores
+  - Elaine (Karen)
+  - R2D2RDZ
+  - "Arturo Rodriguez Sece\xF1as"
+  - David Del Toro
+  - Viut
+  - "David Ignacio V\xE1zquez Mendoza"
+  - Armando M. Guzman
+  - Catherine Huerta
   gameObject: {fileID: 239666065}
 --- !u!1 &428420496
 GameObject:

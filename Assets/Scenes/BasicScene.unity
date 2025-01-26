@@ -2210,6 +2210,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Origin (XR Rig)
       objectReference: {fileID: 0}
+    - target: {fileID: 6727607856980166653, guid: 2821a3995d9dd3d4c923f995c8d1d039, type: 3}
+      propertyPath: m_StepOffset
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8751286159528783439, guid: 2821a3995d9dd3d4c923f995c8d1d039, type: 3}
       propertyPath: console
       value: 

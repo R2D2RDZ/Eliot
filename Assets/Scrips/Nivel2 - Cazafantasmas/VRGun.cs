@@ -94,6 +94,12 @@ public class VRGun : MonoBehaviour
             currentHandController = null;
         }
 
+        if (Vector3.Distance(leftHandController.position, rightHandController.position) < 0.25f)
+        {
+            isGripped = true;
+            currentHandController = rightHandController;
+        }
+
         // Si el arma está agarrada, sigue la posición y rotación de la mano correspondiente
         if (isGripped && currentHandController != null)
         {
