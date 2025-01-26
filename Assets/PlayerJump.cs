@@ -6,7 +6,7 @@ public class PlayerJump : MonoBehaviour
 {
     [SerializeField] private InputActionProperty jumpButton;
     [SerializeField] private CharacterController cc;
-    [SerializeField] private float jumpHeight = 3f;
+    [SerializeField] private float jumpHeight = 15f;
     [SerializeField] private LayerMask groundLayers;
     [SerializeField] private LayerMask bounceLayers;
     [SerializeField] TMP_Text console;
@@ -19,22 +19,18 @@ public class PlayerJump : MonoBehaviour
     private void Update()
     {
 
-        console.text = transform.position.ToString();
-        console.text += "\n" + movement;
+        /*console.text = transform.position.ToString();
+        console.text += "\n" + movement;*/
         bool _isGrounded = IsGrounded();
         bool _isBounce = IsBounce();
         if (!_isGrounded || !_isBounce)
         {
             movement.y += gravity * Time.deltaTime;
         }
-        if (_isGrounded)
-        {
-            console.text += "\nIsGrounded";
-            movement = Vector3.down;
-        }
+        
         if (_isBounce)
         {
-            console.text += "\nIsBounce";
+           //console.text += "\nIsBounce";
             _isGrounded = true;
             Bounce();
         }
@@ -56,6 +52,13 @@ public class PlayerJump : MonoBehaviour
         cc.Move(movement * Time.deltaTime);
 
         
+    }
+    void FixedUpdate(){
+        //if (_isGrounded)
+        {
+            //console.text += "\nIsGrounded";
+            //movement = Vector3.down;
+        }
     }
     private bool IsGrounded()
     {
