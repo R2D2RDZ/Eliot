@@ -2,13 +2,10 @@ using UnityEngine;
 
 public class GhostMovement : MonoBehaviour
 {
-    public float speed; // Velocidad del fantasma
+    public float speed = 5f; // Velocidad del fantasma
     public Vector3 roomBounds = new Vector3(24f, 8f, 24f); // Límites de la habitación (x, y, z)
     public float floatSpeed = 1.5f; // Velocidad del efecto de "flotación"
-    public float changeDirectionInterval = 1f; // Intervalo de tiempo para cambiar de dirección
-
-    public delegate void GhostDestroyed();
-    public event GhostDestroyed OnDestroyed;
+    public float changeDirectionInterval = 2f; // Intervalo de tiempo para cambiar de dirección
 
     private Vector3 targetPosition; // La posición a la que el fantasma se moverá
     private bool isStopped = false; // Estado para saber si el fantasma está detenido
@@ -80,11 +77,6 @@ public class GhostMovement : MonoBehaviour
     {
         isStopped = true; // Cambiar el estado para detener el movimiento
         speed = 0f; // Asegurarse de que la velocidad sea 0
-
-        // Notificar destrucción
-        OnDestroyed?.Invoke();
-
-        // Destruir el fantasma
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, 2f); // Destruir el fantasma después de 2 segundos
     }
 }

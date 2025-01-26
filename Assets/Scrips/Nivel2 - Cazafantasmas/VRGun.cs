@@ -11,18 +11,14 @@ public class VRGun : MonoBehaviour
     public float grabDistance = 0.5f; // Distancia máxima para agarrar el arma
     public float shootDelay = 0.5f; // Tiempo entre disparos
 
-    [Header("Efecto de sonido")]
-    public AudioClip shootSound; // Efecto de sonido al disparar
-    public AudioSource audioSource; // Componente AudioSource para reproducir el sonido
-
     [Header("Controladores de las manos")]
     public Transform leftHandController; // Referencia al controlador de la mano izquierda
     public Transform rightHandController; // Referencia al Transform del RightHand Controller
 
     private Transform currentHandController; // La mano actual que está agarrando el arma
-    private bool isGripped = false; // Estado para saber si el arma está agarrada
+    public bool isGripped = false; // Estado para saber si el arma está agarrada
+    public bool isShooting = false;
     private float lastShootTime = 0f; // Tiempo del último disparo
-
 
     void Start()
     {
@@ -117,9 +113,15 @@ public class VRGun : MonoBehaviour
         if (Time.time - lastShootTime >= shootDelay)
         {
             Shoot();
+            isShooting = true;
             lastShootTime = Time.time; // Actualiza el tiempo del último disparo
         }
+        else
+        {
+            isShooting = false;
+        }
     }
+
     void Shoot()
     {
         // Instancia una bala en el FirePoint
@@ -132,18 +134,7 @@ public class VRGun : MonoBehaviour
             rb.linearVelocity = firePoint.forward * bulletSpeed;
         }
 
-        // Reproduce el sonido de disparo
-        PlayShootSound();
-
         // Destruye la bala después de 2 segundos
-        Destroy(bullet, 1f);
-    }
-
-    void PlayShootSound()
-    {
-        if (shootSound != null && audioSource != null)
-        {
-            audioSource.PlayOneShot(shootSound); // Reproduce el sonido de disparo
-        }
+        Destroy(bullet, 2f);
     }
 }
