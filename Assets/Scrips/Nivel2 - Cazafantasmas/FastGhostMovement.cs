@@ -7,68 +7,55 @@ public class FastGhostMovement : MonoBehaviour
     public float circleSpeed = 2f; // Velocidad del movimiento circular
     public float zigzagAmplitude = 2f; // Amplitud del zigzag
     public float zigzagFrequency = 3f; // Frecuencia del zigzag
-    private Transform player; // Referencia al jugador
 
     private float angle; // Ángulo para el movimiento circular
     private float time; // Contador de tiempo para el zigzag
-    private bool hidingBehindPlayer = false; // Estado de esconderse
-
-    void Start()
-    {
-        // Busca al jugador automáticamente por el tag "Player"
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-        if (playerObject != null)
-        {
-            player = playerObject.transform;
-        }
-        else
-        {
-            Debug.LogWarning("No se encontró ningún objeto con el tag 'Player'.");
-        }
-    }
+    private bool isStopped = false; // Estado para saber si el fantasma está detenido
 
     void Update()
     {
-        if (!hidingBehindPlayer)
-        {
-            // Decide el tipo de movimiento basado en tiempo
-            if (Time.time % 5 < 2.5f)
-                MoveInCircle();
-            else
-                MoveInZigzag();
-        }
-
-        if (ShouldHide())
-            HideBehindPlayer();
+        // Alterna entre movimiento circular y zigzag basado en tiempo
+        if (Time.time % 5 < 2.5f)
+            MoveInCircle();
+        else
+            MoveInZigzag();
     }
 
     private void MoveInCircle()
     {
+        // Calcula el movimiento circular
         angle += circleSpeed * Time.deltaTime;
         float x = Mathf.Cos(angle) * circleRadius;
         float z = Mathf.Sin(angle) * circleRadius;
+
+        // Aplica el movimiento circular
         transform.position += new Vector3(x, 0, z) * speed * Time.deltaTime;
     }
 
     private void MoveInZigzag()
     {
+        // Calcula el desplazamiento en zigzag
         float offset = Mathf.Sin(time * zigzagFrequency) * zigzagAmplitude;
+
+        // Direccion principal + zigzag
         Vector3 direction = transform.forward + new Vector3(offset, 0, 0);
         transform.position += direction.normalized * speed * Time.deltaTime;
+
+        // Incrementa el tiempo para el zigzag
         time += Time.deltaTime;
     }
 
-    private bool ShouldHide()
+    private void OnCollisionEnter(Collision collision)
     {
-        // Determina si debe esconderse (por ejemplo, si está cerca del jugador)
-        return Vector3.Distance(transform.position, player.position) < 10f;
+        if (collision.gameObject.CompareTag("BurbujaBala"))
+        {
+            StopGhost(); // Detener al fantasma
+        }
     }
 
-    private void HideBehindPlayer()
+    private void StopGhost()
     {
-        hidingBehindPlayer = true;
-        Vector3 hidePosition = player.position - player.forward * 2f; // Posición detrás del jugador
-        transform.position = Vector3.MoveTowards(transform.position, hidePosition, speed * Time.deltaTime);
-        hidingBehindPlayer = false;
+        isStopped = true; // Cambiar el estado para detener el movimiento
+        speed = 0f; // Asegurarse de que la velocidad sea 0
     }
 }

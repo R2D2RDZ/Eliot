@@ -7,6 +7,7 @@ public class ModerateGhostMovement : MonoBehaviour
 
     private Vector3 direction; // Dirección principal del movimiento
     private float time; // Contador de tiempo para el zigzag
+    private bool isStopped = false; // Estado para saber si el fantasma está detenido
 
     void Start()
     {
@@ -32,5 +33,19 @@ public class ModerateGhostMovement : MonoBehaviour
 
         // Incrementa el tiempo para el zigzag
         time += Time.deltaTime;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("BurbujaBala"))
+        {
+            StopGhost(); // Detener al fantasma
+        }
+    }
+
+    private void StopGhost()
+    {
+        isStopped = true; // Cambiar el estado para detener el movimiento
+        speed = 0f; // Asegurarse de que la velocidad sea 0
     }
 }

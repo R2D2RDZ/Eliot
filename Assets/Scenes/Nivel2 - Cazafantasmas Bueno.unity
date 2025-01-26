@@ -467,6 +467,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Balas
       objectReference: {fileID: 0}
+    - target: {fileID: 3283839183117988197, guid: af03a468761cfa54ba99af1860af1354, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7171647269838272888, guid: af03a468761cfa54ba99af1860af1354, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.47
@@ -632,7 +636,7 @@ MonoBehaviour:
   fastGhostPrefab: {fileID: 1945770172}
   spawnPoints:
   - {fileID: 1574307495}
-  movementSpeed: 2.5
+  movementSpeed: 5
   slowChance: 0
   moderateChance: 100
   fastChance: 0
@@ -1077,7 +1081,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393760668}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d1a059d60303ef4c84772cdc4603ec2, type: 3}
   m_Name: 
@@ -1322,7 +1326,7 @@ MonoBehaviour:
   fastGhostPrefab: {fileID: 1945770172}
   spawnPoints:
   - {fileID: 1939755566}
-  movementSpeed: 2.5
+  movementSpeed: 7
   slowChance: 0
   moderateChance: 0
   fastChance: 100
@@ -1779,7 +1783,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1945770172}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcdb378ec8f33f449a0b63bd085e3e17, type: 3}
   m_Name: 
@@ -1866,7 +1870,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043950669}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 00152f2eb3f195341a848b30c05ea224, type: 3}
   m_Name: 
@@ -2001,7 +2005,7 @@ MonoBehaviour:
   fastGhostPrefab: {fileID: 1945770172}
   spawnPoints:
   - {fileID: 1734016760}
-  movementSpeed: 2.5
+  movementSpeed: 1
   slowChance: 100
   moderateChance: 0
   fastChance: 0

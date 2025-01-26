@@ -89,6 +89,7 @@ public class SlowGhostMovement : MonoBehaviour
     public Vector3 centerPoint; // Centro del movimiento circular
 
     private float angle; // Ángulo actual del movimiento circular
+    private bool isStopped = false; // Estado para saber si el fantasma está detenido
 
     void Start()
     {
@@ -112,6 +113,20 @@ public class SlowGhostMovement : MonoBehaviour
 
         // Actualiza la posición del fantasma
         transform.position = Vector3.MoveTowards(transform.position, centerPoint + new Vector3(x, 0, z), speed * Time.deltaTime);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("BurbujaBala"))
+        {
+            StopGhost(); // Detener al fantasma
+        }
+    }
+
+    private void StopGhost()
+    {
+        isStopped = true; // Cambiar el estado para detener el movimiento
+        speed = 0f; // Asegurarse de que la velocidad sea 0
     }
 }
 
