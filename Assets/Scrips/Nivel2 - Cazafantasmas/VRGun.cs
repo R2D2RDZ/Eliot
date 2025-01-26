@@ -134,7 +134,7 @@ public class VRGun : MonoBehaviour
     public Transform rightHandController; // Referencia al Transform del RightHand Controller
 
     [Header("Controlador de fantasmas")]
-    public GhostController ghostController; // Referencia al controlador de fantasmas
+    public SlowGhost ghostController; // Referencia al controlador de fantasmas
 
     private Transform currentHandController; // La mano actual que está agarrando el arma
     private bool isGripped = false; // Estado para saber si el arma está agarrada

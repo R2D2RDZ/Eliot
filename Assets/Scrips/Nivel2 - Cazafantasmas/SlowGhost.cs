@@ -13,119 +13,117 @@ using UnityEngine;
     }
 }*/
 
-using System.Collections.Generic;
-
-public class GhostController : MonoBehaviour
+public class SlowGhost : MonoBehaviour
 {
-    [Header("Configuración de fantasmas")]
-    public GameObject ghostPrefab; // Prefab de los fantasmas
-    public int ghostCount = 5; // Cantidad de fantasmas a generar
-    public float spawnRadius = 2f; // Radio de aparición de los fantasmas
-    public float moveSpeed = 1f; // Velocidad de movimiento circular de los fantasmas
-    public float rotationSpeed = 50f; // Velocidad de rotación del movimiento circular
+    [Header("Configuración de los fantasmas")]
+    public GameObject ghostPrefab; // Prefab del fantasma
+    public Transform[] spawnPoints; // Puntos donde aparecerán los fantasmas
+    public float movementSpeed = 2.5f; // Velocidad de movimiento de los fantasmas
+    public string furnitureTag = "Mueble"; // Tag de los muebles para esquivar
+    public string bulletTag = "BurbujaBala"; // Tag de las balas para detener al fantasma
 
-    private List<GameObject> spawnedGhosts = new List<GameObject>(); // Lista para almacenar los fantasmas generados
+    private bool ghostsSpawned = false; // Verifica si los fantasmas ya aparecieron
 
-    [Header("Restricciones de la habitación")]
-    public Vector3 roomCenter = Vector3.zero; // Centro de la habitación
-    public Vector3 roomSize = new Vector3(24f, 8f, 24f); // Dimensiones de la habitación
+    public void SpawnGhosts()
+    {
+        if (ghostsSpawned) return; // Evitar que se invoquen varias veces
 
-    [Header("Detección de colisiones")]
-    public string furnitureTag = "Mueble"; // Tag de objetos a esquivar
-    public string wallTag = "Wall"; // Tag de las paredes de la habitación
-    public string bubbleBulletTag = "BalaBurbuja"; // Tag de proyectiles que detendrán a los fantasmas
+        // Crear un fantasma en cada punto de aparición
+        foreach (Transform spawnPoint in spawnPoints)
+        {
+            GameObject ghost = Instantiate(ghostPrefab, spawnPoint.position, spawnPoint.rotation);
+
+            // Configurar su movimiento
+            GhostMovement movement = ghost.AddComponent<GhostMovement>();
+            movement.speed = movementSpeed;
+            movement.furnitureTag = furnitureTag;
+            movement.bulletTag = bulletTag;
+
+            // Asegurarse de que el fantasma tenga el tag "Ghost"
+            ghost.tag = "Ghost";
+        }
+
+        ghostsSpawned = true; // Marcar que los fantasmas ya fueron generados
+    }
+}
+
+public class GhostMovement : MonoBehaviour
+{
+    public float speed; // Velocidad del fantasma
+    public Vector3 roomBounds = new Vector3(24f, 8f, 24f); // Límites de la habitación (x, y, z)
+    public float floatSpeed = 1.5f; // Velocidad del efecto de "flotación"
+    public float changeDirectionInterval = 2f; // Intervalo de tiempo para cambiar de dirección
+    public string furnitureTag; // Tag de los muebles
+    public string bulletTag; // Tag de las balas
+
+    private Vector3 targetPosition; // La posición a la que el fantasma se moverá
+    private bool isStopped = false; // Estado para saber si el fantasma está detenido
+
+    void Start()
+    {
+        SetRandomTargetPosition(); // Inicializa una posición aleatoria como objetivo
+        InvokeRepeating(nameof(SetRandomTargetPosition), changeDirectionInterval, changeDirectionInterval); // Cambia de dirección periódicamente
+    }
 
     void Update()
     {
-        MoveGhostsInCircle();
-    }
-
-    // Método para generar los fantasmas
-    public void SpawnGhosts()
-    {
-        if (spawnedGhosts.Count > 0) return; // Evitar que se generen fantasmas múltiples veces
-
-        for (int i = 0; i < ghostCount; i++)
+        if (!isStopped)
         {
-            Vector3 spawnPosition = GetRandomPositionInRoom();
-            GameObject ghost = Instantiate(ghostPrefab, spawnPosition, Quaternion.identity);
-            spawnedGhosts.Add(ghost);
+            MoveTowardsTarget(); // Mueve al fantasma
+            FloatEffect(); // Aplica el efecto de flotación
         }
     }
 
-    // Obtener una posición aleatoria dentro de la habitación
-    private Vector3 GetRandomPositionInRoom()
+    private void MoveTowardsTarget()
     {
-        float x = Random.Range(roomCenter.x - roomSize.x / 2, roomCenter.x + roomSize.x / 2);
-        float y = roomCenter.y; // Mantener la altura fija
-        float z = Random.Range(roomCenter.z - roomSize.z / 2, roomCenter.z + roomSize.z / 2);
-        return new Vector3(x, y, z);
-    }
-
-    // Movimiento circular de los fantasmas
-    private void MoveGhostsInCircle()
-    {
-        foreach (GameObject ghost in spawnedGhosts)
+        // Esquivar muebles con raycast
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 1f))
         {
-            if (ghost != null)
+            if (hit.collider.CompareTag(furnitureTag))
             {
-                // Movimiento circular en torno al centro de la habitación
-                ghost.transform.RotateAround(roomCenter, Vector3.up, rotationSpeed * Time.deltaTime);
-
-                // Limitar posición dentro de la habitación
-                Vector3 position = ghost.transform.position;
-
-                if (!IsWithinRoomBounds(position))
-                {
-                    Vector3 directionToCenter = (roomCenter - position).normalized;
-                    ghost.transform.position += directionToCenter * moveSpeed * Time.deltaTime;
-                }
-
-                // Esquivar objetos con el tag "Mueble"
-                if (Physics.Raycast(ghost.transform.position, ghost.transform.forward, out RaycastHit hit, 1f))
-                {
-                    if (hit.collider.CompareTag(furnitureTag))
-                    {
-                        ghost.transform.Rotate(Vector3.up, 180f); // Cambiar dirección
-                    }
-                }
-
-                // Detectar colisión con paredes
-                if (Physics.Raycast(ghost.transform.position, ghost.transform.forward, out RaycastHit wallHit, 1f))
-                {
-                    if (wallHit.collider.CompareTag(wallTag))
-                    {
-                        ghost.transform.Rotate(Vector3.up, 180f); // Cambiar dirección
-                    }
-                }
+                targetPosition = transform.position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
             }
         }
+
+        // Mover hacia el objetivo
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+
+        // Si llega al objetivo, calcula un nuevo objetivo
+        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+        {
+            SetRandomTargetPosition();
+        }
     }
 
-    // Verificar si un fantasma está dentro de los límites de la habitación
-    private bool IsWithinRoomBounds(Vector3 position)
+    private void FloatEffect()
     {
-        return position.x >= roomCenter.x - roomSize.x / 2 &&
-               position.x <= roomCenter.x + roomSize.x / 2 &&
-               position.y >= roomCenter.y - roomSize.y / 2 &&
-               position.y <= roomCenter.y + roomSize.y / 2 &&
-               position.z >= roomCenter.z - roomSize.z / 2 &&
-               position.z <= roomCenter.z + roomSize.z / 2;
+        // Movimiento vertical para el efecto de flotación
+        transform.position += new Vector3(0, Mathf.Sin(Time.time * floatSpeed) * 0.01f, 0);
     }
 
-    // Método para detener a un fantasma cuando es impactado
+    private void SetRandomTargetPosition()
+    {
+        // Genera una posición aleatoria dentro de los límites de la habitación
+        targetPosition = new Vector3(
+            Random.Range(-roomBounds.x, roomBounds.x),
+            Random.Range(0f, roomBounds.y), // Asegúrate de que se mantenga dentro de los límites verticales
+            Random.Range(-roomBounds.z, roomBounds.z)
+        );
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag(bubbleBulletTag))
+        if (collision.gameObject.CompareTag(bulletTag)) // Detener al ser impactado por una bala
         {
-            foreach (GameObject ghost in spawnedGhosts)
-            {
-                if (collision.collider.gameObject == ghost)
-                {
-                    ghost.GetComponent<Rigidbody>().linearVelocity = Vector3.zero; // Detener movimiento
-                    ghost.GetComponent<Rigidbody>().isKinematic = true; // Desactivar física
-                }
-            }
+            StopGhost();
         }
     }
+
+    private void StopGhost()
+    {
+        isStopped = true; // Detener el movimiento
+        speed = 0f;
+        Debug.Log($"{gameObject.name} ha sido detenido.");
+    }
 }
+
