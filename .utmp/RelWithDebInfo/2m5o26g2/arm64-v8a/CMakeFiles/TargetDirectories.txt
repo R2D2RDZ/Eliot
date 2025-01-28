@@ -1,0 +1,5 @@
+C:/Users/daved/Documents/repos/GGJ2025/ELIOT/Eliot/.utmp/RelWithDebInfo/2m5o26g2/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/daved/Documents/repos/GGJ2025/ELIOT/Eliot/.utmp/RelWithDebInfo/2m5o26g2/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/Users/daved/Documents/repos/GGJ2025/ELIOT/Eliot/.utmp/RelWithDebInfo/2m5o26g2/arm64-v8a/GameActivity/CMakeFiles/game.dir
+C:/Users/daved/Documents/repos/GGJ2025/ELIOT/Eliot/.utmp/RelWithDebInfo/2m5o26g2/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+C:/Users/daved/Documents/repos/GGJ2025/ELIOT/Eliot/.utmp/RelWithDebInfo/2m5o26g2/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir

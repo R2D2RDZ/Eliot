@@ -1,0 +1,2 @@
+C:\Users\daved\Documents\repos\GGJ2025\ELIOT\Eliot\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\Users\daved\Documents\repos\GGJ2025\ELIOT\Eliot\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt
